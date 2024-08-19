@@ -29,7 +29,7 @@
 .nav-items > ul > li{
   padding: 10px;
   margin: 10px;
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .res-card{
@@ -61,4 +61,34 @@
   display: flex;
   flex-wrap: wrap;
   column-gap: 10px;
+}
+.footer-container{
+  background: #02060C;
+  color: white;
+  height: 450px;
+  padding-top: 3rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-container > ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;  
+}
+
+.footer-container > li{
+  
+}
+
+.footer-logo{
+  width: 7rem;
+}
+
+.filter-btn{
+  margin: 10px;
+  cursor: pointer;
+  border: none;
+  height: 50px
 }
