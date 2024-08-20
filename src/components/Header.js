@@ -12,7 +12,7 @@ const Header = () => {
             src="https://static.vecteezy.com/system/resources/previews/000/095/292/original/thick-burger-vector.jpg"
             />
             <span >FoodZies</span>
-          </div>
+            </div>
         </div>
         <div className="nav-items">
           <ul>
