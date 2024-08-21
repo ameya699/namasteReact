@@ -40,16 +40,23 @@
   background-color: #f0f0f0;
   border: 1px solid white;
   margin: 5px;
+  flex-basis: 200px;
+
 }
 
 .res-card:hover{
-  border: 1px solid black;
+  
+  border: 1px solid orange;
   cursor: pointer;
-  transition: 0.5s linear;
+  transition:0.5s linear;
+  flex-basis:220px;
 }
+
 
 .search{
   padding: 10px;
+  display: flex;
+  column-gap: 10px;
 }
 
 .res-logo{
@@ -67,9 +74,10 @@
   background: #02060C;
   color: white;
   height: 300px;
-  padding-top: 3rem;
+  padding: 1rem 0 5rem 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  column-gap: 13rem;
 
 }
 
@@ -77,13 +85,13 @@
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  row-gap: 2.5rem;  
+  row-gap: 2rem;  
 }
 
 
 
 .footer-logo{
-  width: 7rem;
+  width: 5rem;
 }
 
 .filter{
@@ -114,9 +122,31 @@
   cursor: pointer;
   background: transparent;
   border: 2px solid transparent;
+  font-size: 18px;
+  border-radius: 5px;
 }
 
 .login:hover{
   border: 2px solid #F0BC83;
-  transition: 1s linear infinite;
+  transition: 0.5s linear ;
 }
+
+.search-button{
+    cursor: pointer;
+    border: none;
+    height: 50px;
+    background: rgb(217, 212, 212);
+    border-radius: 4px;
+}
+
+input{
+  font-size: 16px;
+  border:1px solid rgb(217, 212, 212);
+  padding-left: 1rem;
+}
+
+input::placeholder{
+  font-size: 11px;
+  padding-left: 1px;
+}
+

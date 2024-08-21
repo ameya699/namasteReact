@@ -7,6 +7,7 @@ import { ShimmerSimpleGallery } from "react-shimmer-effects";
 
 
 
+
 const Body = () => {
 
     useEffect(()=>{
@@ -71,8 +72,8 @@ const Body = () => {
         {console.log(filteredRest)}
         <div className="filter">
           <div className='search'>
-            <input type='text' className='search-box' value={searchValue} name='searchText' onChange={handleTextChange}/>
-            <button onClick={handleSearch}>Search</button>
+            <input type='text' className='search-box' value={searchValue} name='searchText' placeholder='Search for restaurants and food' onChange={handleTextChange}/>
+            <button onClick={handleSearch} className='search-button'>Search</button>
           </div>
           <button className='filter-btn' onClick={triggerFilter} style={buttonColor} >Top Rated Restaurants</button>
         </div>
