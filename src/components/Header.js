@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
+  const [loggedIn,setLoggedIn]=useState(false)
+
+  const handleLogin=()=>{
+    setLoggedIn(!loggedIn)
+  }
     return (
       <div className="header">
         <div className="logo-container">
@@ -20,6 +25,7 @@ const Header = () => {
             <li>About Us</li>
             <li>Contact Us</li>
             <li><FaShoppingCart/></li>
+            <button className='login' onClick={handleLogin}>{loggedIn?"Logout":"Login"}</button>
           </ul>
         </div>
       </div>

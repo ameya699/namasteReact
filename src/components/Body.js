@@ -19,6 +19,7 @@ const Body = () => {
       const json=await data.json()
       const restData=await json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       setData(restData)
+      setFilteredRest(restData)
     }
     catch{
       <>
@@ -29,6 +30,8 @@ const Body = () => {
 
     const [foodData,setData]=useState([]);
     const [topRatedFilter,setTopRatedFilter]=useState(false);
+    const [searchValue,setSearchValue]=useState("");
+    const [filteredRest,setFilteredRest]=useState([])
 
     //initialize the button color
     const [buttonColor,setButtonColor]=useState({
@@ -39,32 +42,47 @@ const Body = () => {
     //set the data and button color
     const triggerFilter=()=>{
       if(topRatedFilter){
-        fetchData()
+        setFilteredRest(foodData)
+        // console.log(filteredRest)
         setButtonColor({...buttonColor,background:"rgb(217, 212, 212)"})
       }
       else{
         const filteredData=foodData.filter((restaurant)=>parseFloat(restaurant.info.avgRatingString)>4.0)
-        setData(filteredData)
+        setFilteredRest(filteredData)
+        // console.log(filteredData)
         setButtonColor({...buttonColor,background:"#FF8B32"})
       }
       setTopRatedFilter(!topRatedFilter)
     }
     
+    const handleSearch=()=>{
+      const searchedData=foodData.filter((restaurant)=>(restaurant.info.name).toLowerCase().includes(searchValue.toLowerCase()))
+      setFilteredRest(searchedData)
+    }
     
-    
+    const handleTextChange=(e)=>{
+      setSearchValue(e.target.value);
+      // const searchedData=foodData.filter((restaurant)=>(restaurant.info.name).toLowerCase().includes(searchValue.toLowerCase()))
+      // setData(searchedData)
+    }
 
     return (
       <div className="body">
+        {console.log(filteredRest)}
         <div className="filter">
-          <button className='filter-btn' onClick={triggerFilter} style={buttonColor} >Top Rated Restaurants</button>
-          {topRatedFilter&&<b><span>Showing top rated ⭐️ restaurants</span></b>}
-          {console.log(foodData)}
-          <Loader load={Boolean(foodData.length)}/>
-          {foodData.length===0?<ShimmerSimpleGallery card imageHeight={250} row={2} col={4}  caption />:""}
+          <div className='search'>
+            <input type='text' className='search-box' value={searchValue} name='searchText' onChange={handleTextChange}/>
+            <button onClick={handleSearch}>Search</button>
           </div>
+          <button className='filter-btn' onClick={triggerFilter} style={buttonColor} >Top Rated Restaurants</button>
+        </div>
+          {topRatedFilter&&<b><span style={{alignSelf:'center'}}>Showing top rated ⭐️ restaurants</span></b>}
+
+          <Loader load={Boolean(filteredRest.length)}/>
+          {filteredRest.length===0?<ShimmerSimpleGallery card imageHeight={250} row={2} col={4}  caption />:""}
         <div className="res-container">
           {
-            foodData.map((ele,index)=><ResCard  key={ele.info.id} resData={ele}/>)
+            filteredRest.map((ele,index)=><ResCard  key={ele.info.id} resData={ele}/>)
           }
         </div>
       </div>
