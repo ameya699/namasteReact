@@ -150,3 +150,13 @@ input::placeholder{
   padding-left: 1px;
 }
 
+.user-location{
+  align-self: center;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.user-location:hover{
+  color: orange;
+  transition: 0.2s linear;
+}

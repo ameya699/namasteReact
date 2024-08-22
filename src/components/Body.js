@@ -3,27 +3,32 @@ import ResCard from './ResCard';
 import data from "../data/Data"
 import Loader from './Loader';
 import { ShimmerSimpleGallery } from "react-shimmer-effects";
+import { RiUserLocationFill } from "react-icons/ri";
+
 
 
 
 
 
 const Body = () => {
-
-    useEffect(()=>{
-      fetchData();
+    useEffect( ()=>{
+      getLatLong()
     },[])
 
+    
     const fetchData=async()=>{
       try
-      {const data=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.6599188&lng=75.9063906&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
-      const json=await data.json()
+      { 
+      const data=await fetch(`https://www.swiggy.com/dapi/restaurants/list/v5?lat=${location.latitude}&lng=${location.longitude}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`)
+      const json=await data?.json()
+ 
       const restData=await json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
       setData(restData)
       setFilteredRest(restData)
     }
-    catch{
+    catch(error){
       <>
+      {console.log(error)}
         <Loader load={false}/>
       </>
     }
@@ -33,13 +38,42 @@ const Body = () => {
     const [topRatedFilter,setTopRatedFilter]=useState(false);
     const [searchValue,setSearchValue]=useState("");
     const [filteredRest,setFilteredRest]=useState([])
-
+    const [location,setLocation]=useState({latitude:17.6599188,longitude:75.9063906})
     //initialize the button color
     const [buttonColor,setButtonColor]=useState({
       background:"rgb(217, 212, 212)",
       borderRadius:"4px"
     })
 
+    const getLatLong=()=>{
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition( (position)=> {
+          const latitude = position.coords.latitude 
+          const longitude = position.coords.longitude 
+          const details={
+            latitude,
+            longitude
+          }
+          setLocation(details)
+          fetchData()
+          
+          // console.log(location)
+        });
+      }
+      else{
+        alert('Please allow location access')
+      }
+    }
+
+    const handleLocation=()=>{
+     try {
+      getLatLong()
+     } catch (error) {
+      console.log(error);
+     }
+      // setLocation(locationObject)
+      // console.log(locationObject)
+    }
     //set the data and button color
     const triggerFilter=()=>{
       if(topRatedFilter){
@@ -67,7 +101,7 @@ const Body = () => {
       // setData(searchedData)
     }
 
-    return (
+    return data.length ? (
       <div className="body">
         {console.log(filteredRest)}
         <div className="filter">
@@ -76,9 +110,11 @@ const Body = () => {
             <button onClick={handleSearch} className='search-button'>Search</button>
           </div>
           <button className='filter-btn' onClick={triggerFilter} style={buttonColor} >Top Rated Restaurants</button>
+          <RiUserLocationFill onClick={handleLocation} className='user-location'/>
         </div>
           {topRatedFilter&&<b><span style={{alignSelf:'center'}}>Showing top rated ⭐️ restaurants</span></b>}
-
+          {console.log("this is aboe filtered rest")}
+          {console.log(filteredRest)}
           <Loader load={Boolean(filteredRest.length)}/>
           {filteredRest.length===0?<ShimmerSimpleGallery card imageHeight={250} row={2} col={4}  caption />:""}
         <div className="res-container">
@@ -87,7 +123,7 @@ const Body = () => {
           }
         </div>
       </div>
-    );
+    ):"";
   };
 
 export default Body
