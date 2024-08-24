@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaShoppingCart } from "react-icons/fa";
+ 
 
 const Header = () => {
   const [loggedIn,setLoggedIn]=useState(false)
@@ -11,12 +12,14 @@ const Header = () => {
       <div className="header">
         <div className="logo-container">
           <div style={{display:"flex",alignItems:"center"}}>
-          <img
+ <img
             className="logo"
             alt="App Logo"
             src="https://static.vecteezy.com/system/resources/previews/000/095/292/original/thick-burger-vector.jpg"
             />
+ 
             <span >FoodZies</span>
+            
             </div>
         </div>
         <div className="nav-items">
