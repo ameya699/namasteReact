@@ -18,8 +18,8 @@ const RestaurantMenu = () => {
   };
 
    const bannerobj =resinfo?.cards[2]?.card?.card?.info
-   const itemCards=resinfo?.cards[5].groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards
-//    console.log(itemCards)
+   const itemCards=resinfo?.cards[resinfo?.cards.length-1].groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards
+   console.log(itemCards)
   return resinfo === null ? (
     <ShimmerSimpleGallery card imageHeight={250} row={2} col={4} caption />
   ) : (
