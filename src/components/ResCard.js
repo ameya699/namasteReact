@@ -4,12 +4,10 @@ const ResCard = (props) => {
   
     const {resData}=props;
     const data=resData.info
-    const clickRest=()=>{
-      window.open(resData.cta.link, '_blank').focus();
-    }
+    
     // console.log(data)
     return (
-      <div className="res-card" onClick={clickRest}>
+      <div className="res-card">
         <img 
           src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${data.cloudinaryImageId}`} 
           alt="res-logo"
