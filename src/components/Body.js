@@ -4,6 +4,7 @@ import data from "../data/Data"
 import Loader from './Loader';
 import { ShimmerSimpleGallery } from "react-shimmer-effects";
 import { RiUserLocationFill } from "react-icons/ri";
+import { Link } from 'react-router-dom';
 
 
 
@@ -119,7 +120,7 @@ const Body = () => {
           {filteredRest.length===0?<ShimmerSimpleGallery card imageHeight={250} row={2} col={4}  caption />:""}
         <div className="res-container">
           {
-            filteredRest.map((ele,index)=><ResCard  key={ele.info.id} resData={ele}/>)
+            filteredRest.map((ele,index)=><Link to={`/restaurants/${ele.info.id}/${location.latitude}/${location.longitude}`}><ResCard  key={ele.info.id} resData={ele}/></Link>)
           }
         </div>
       </div>

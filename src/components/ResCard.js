@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const ResCard = (props) => {
   
@@ -7,7 +8,7 @@ const ResCard = (props) => {
     
     // console.log(data)
     return (
-      <div className="res-card">
+     <div className="res-card">
         <img 
           src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${data.cloudinaryImageId}`} 
           alt="res-logo"

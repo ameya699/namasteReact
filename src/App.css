@@ -2,6 +2,11 @@
   padding: 10px;
 }
 
+a{
+  text-decoration: none;
+  color: black;
+}
+
 .header{
   display: flex;
   justify-content: space-between;
@@ -160,4 +165,9 @@ input::placeholder{
 .user-location:hover{
   color: orange;
   transition: 0.2s linear;
+}
+
+.foodlogo{
+  width: 200px;
+  object-fit: cover;
 }
