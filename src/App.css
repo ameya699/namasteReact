@@ -171,3 +171,12 @@ input::placeholder{
   width: 200px;
   object-fit: cover;
 }
+.displayFood-container{
+  height: 100px;
+  width: 500px;
+  border: 1px dotted grey;
+  background: #EBDFD7;
+  display: flex;
+  justify-content: space-between;
+
+}

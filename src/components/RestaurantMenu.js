@@ -2,30 +2,34 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ShimmerSimpleGallery } from "react-shimmer-effects";
 import DisplayFood from "./DisplayFood";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  const [resinfo, setResInfo] = useState(null);
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
   const {resId,lat,long}=useParams();
   
-  const fetchMenu = async () => {
-    const data = await fetch(
-      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${lat}&lng=${long}&restaurantId=${resId}`
-    );
-    const json = await data.json();
-    console.log(json.data)
-    setResInfo(json.data);
-  };
+  const resinfo=useRestaurantMenu(resId,lat,long);
+  // console.log(resinfo)
+  //  console.log(resinfo?.cards[resinfo?.cards.length-1].groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.hasOwnProperty("title"))
+   
+  const bannerobj =resinfo?.cards[2]?.card?.card?.info
+  const filteredData=resinfo?.cards[resinfo?.cards.length-1].groupedCard?.cardGroupMap?.REGULAR?.cards
+  let RecommendedItems=filteredData?.filter((card)=>card.card?.card?.hasOwnProperty("itemCards"))
+  // console.log(RecommendedItems)
+  // RecommendedItems=RecommendedItems.map((item)=>item?.card?.card?.itemCards)
+  // let newList=[]
+  // newList=RecommendedItems.map((item)=>item?.card?.card?.itemCards)
+  // let finList=[]
+  // newList.forEach(element => {
+  //   finList=[...finList,...element]
+  // });
+  // console.log(finList)
 
-   
-   
-   const bannerobj =resinfo?.cards[2]?.card?.card?.info
-   const itemCards=resinfo?.cards[resinfo?.cards.length-1].groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards
-  //  console.log(itemCards)
-  return resinfo === null ? (
+  
+  
+  // console.log(RecommendedItems)
+  const itemCards=resinfo?.cards[resinfo?.cards.length-1].groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards
+   return resinfo === null ? (
     <ShimmerSimpleGallery card imageHeight={250} row={2} col={4} caption />
   ) : (
     <div className="menu">
@@ -33,9 +37,9 @@ const RestaurantMenu = () => {
       <h4>{bannerobj.cuisines.join(", ")} - {bannerobj.costForTwoMessage}</h4>
       <h2>Menu</h2>
       <ul style={{display:"flex",flexWrap:"wrap",gap:"8px"}}>
+
         {
-          itemCards.map((item)=>{
-            // return <li key={item.card.info.id}>{item.card.info.name} - ₹{item.card.info.price/100 || item.card.info.defaultPrice/100}</li>
+            itemCards.map((item)=>{
           return <li key={item.card.info.id} style={{listStyleType:"none",padding:"5px"}}><DisplayFood foodItem={item}/></li>
           })
         }
