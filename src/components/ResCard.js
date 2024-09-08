@@ -8,13 +8,13 @@ const ResCard = (props) => {
     
     // console.log(data)
     return (
-     <div className="res-card">
+     <div className="p-1 w-52 h-100 bg-gray-200 border border-white m-1 flex-basis-52 hover:border-orange-500 hover:cursor-pointer transition duration-500 hover:flex-basis-56">
         <img 
           src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${data.cloudinaryImageId}`} 
           alt="res-logo"
-          className="res-logo"
+          className="w-full h-[100px] object-cover"
         />
-        <h3>{data.name}</h3>
+        <h3><b className='text-[24px]'>{data.name}</b></h3>
         <h4>{data.cuisines.join(" ,")}</h4>
         <h4>{data.avgRatingString==='--'||data.avgRatingString==='NEW'?"No ratings"  :data.avgRatingString+" ⭐️"}</h4>
         <h4>{data.costForTwo}</h4>

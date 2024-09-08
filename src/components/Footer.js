@@ -5,22 +5,22 @@ import { FaLocationDot } from "react-icons/fa6";
 
 const Footer=()=>{
   return(
-    <div className="footer-container">
-      <ul style={{display:'flex',rowGap:"1rem"}}>
-        <li style={{display:"flex",alignItems:"center"}}><img className="footer-logo"
+    <div className="bg-[#02060C] text-white h-[300px] py-4 flex justify-center gap-[13rem]">
+      <ul  className='list-none flex flex-col gap-8'>
+        <li className='flex items-center'><img className="w-20"
           alt="App Logo"
           src={footerlogo}
           /><b>FoodZies</b></li>
         <li>© 2024 FoodZies by Ameya Awatade</li>
       </ul>
-      <ul style={{paddingTop:"1.2rem"}}>
+      <ul className='pt-5'>
         <li><b>Company</b></li>
         <li>About</li>
         <li>Team</li>
       </ul>
-      <ul style={{paddingTop:"1.2rem"}}>
-        <li><b>Delivery across&nbsp;<FaLocationDot style={{textAlign:'center',color:'orange'}}/>
-        </b></li>
+      <ul className='pt-5'>
+        <li className='flex'><FaLocationDot className='text-center text-orange-500 self-center'/>&nbsp;Delivery across
+        </li>
         <li>Solapur</li>
         <li>Pune</li>
         <li>Hyderabad</li>

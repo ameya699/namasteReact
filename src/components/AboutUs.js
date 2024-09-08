@@ -1,8 +1,11 @@
 import React from 'react'
+import User from './User'
 
 const AboutUs = () => {
   return (
-    <div>AboutUs</div>
+    <div>
+    <User/>
+    </div>
   )
 }
 

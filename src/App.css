@@ -1,3 +1,4 @@
+/* 
 .app{
   padding: 10px;
 }
@@ -180,3 +181,12 @@ input::placeholder{
   justify-content: space-between;
 
 }
+
+.user-card{
+  border: 1px solid black;
+  padding: 1rem;
+  margin: 1rem;
+  background: #EBDFD7;
+  width: 500px;
+  border-radius: 10px;
+} */

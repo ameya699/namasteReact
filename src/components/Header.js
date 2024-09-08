@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import useOnlineStatus from '../utils/useOnlineStatus';
  
 
 const Header = () => {
@@ -9,27 +10,32 @@ const Header = () => {
   const handleLogin=()=>{
     setLoggedIn(!loggedIn)
   }
+
+  const onlineStatus=useOnlineStatus()
     return (
-      <div className="header">
-        <div className="logo-container">
-          <div style={{display:"flex",alignItems:"center"}}>
+      <div className="flex justify-between border border-black items-center bg-[rgb(235,224,215)]">
+        <div className="w-10">
+         <Link to='/'>
+         <div  className='flex items-center'>
  <img
-            className="logo"
+            className="w-[100px] mix-blend-darken pl-[20px]"
             alt="App Logo"
             src="https://static.vecteezy.com/system/resources/previews/000/095/292/original/thick-burger-vector.jpg"
             />
  
             <span >FoodZies</span>
             
-            </div>
+            </div></Link>
         </div>
-        <div className="nav-items">
-          <ul>
+        <div className="">
+          <ul className='flex p-4 m-4 gap-4 justify-center'>
+            <li>{onlineStatus?"🟢 Online":"🔴 Offline"}</li>
           <li><Link to='/'>Home</Link></li>
           <li> <Link to='/about'>About Us</Link></li>
           <li> <Link to='/contact'>Contact Us</Link></li>
-            <li><FaShoppingCart/></li>
-            <button className='login' onClick={handleLogin}>{loggedIn?"Logout":"Login"}</button>
+          <li><Link to='/grocery'>Grocery</Link></li>
+            <li className='self-center'><FaShoppingCart/></li>
+            <button className='p-0 px-5 cursor-pointer bg-transparent border-2 border-transparent text-lg rounded-md border-2 border-transparent hover:border-[#F0BC83] transition duration-500 linear"' onClick={handleLogin}>{loggedIn?"Logout":"Login"}</button>
           </ul>
         </div>
       </div>

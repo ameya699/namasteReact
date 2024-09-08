@@ -5,8 +5,7 @@ import Loader from './Loader';
 import { ShimmerSimpleGallery } from "react-shimmer-effects";
 import { RiUserLocationFill } from "react-icons/ri";
 import { Link } from 'react-router-dom';
-
-
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 
 
@@ -105,20 +104,28 @@ const Body = () => {
       // setData(searchedData)
     }
 
+    const onlineStatus=useOnlineStatus()
+
+    if(onlineStatus===false){
+      return (
+        <h1>You might not be connected to the internet, try establishing a stable connection</h1>
+      )
+    }
+
     return data.length ? (
-      <div className="body">
-        <div className="filter">
-          <div className='search'>
-            <input type='text' className='search-box' value={searchValue} name='searchText' placeholder='Search for restaurants and food' onChange={handleTextChange}/>
-            <button onClick={handleSearch} className='search-button'>Search</button>
+      <div className="pb-[450px]">
+        <div className="flex">
+          <div className='p-2 flex gap-2'>
+            <input type='text' size="50" className='text-[16px] border border-black rounded-[4px]' value={searchValue} name='searchText' placeholder='Search for restaurants and food' onChange={handleTextChange}/>
+            <button onClick={handleSearch} className='cursor-pointer border-none h-12 bg-gray-300 rounded-md'>Search</button>
           </div>
-          <button className='filter-btn' onClick={triggerFilter} style={buttonColor} >Top Rated Restaurants</button>
-          <RiUserLocationFill onClick={handleLocation} className='user-location'/>
+          <button className='m-2 cursor-pointer border-none h-12' onClick={triggerFilter} style={buttonColor} >Top Rated Restaurants</button>
+          <RiUserLocationFill onClick={handleLocation} className='self-center text-2xl cursor-pointer hover:text-orange-500 transition duration-200 ease-linear'/>
         </div>
-          {topRatedFilter&&<b><span style={{alignSelf:'center'}}>Showing top rated ⭐️ restaurants</span></b>}
+          {topRatedFilter&&<b><span className='self-center'>Showing top rated ⭐️ restaurants</span></b>}
           <Loader load={Boolean(filteredRest.length>0)}/>
           {filteredRest.length===0?<ShimmerSimpleGallery card imageHeight={250} row={2} col={4}  caption />:""}
-        <div className="res-container">
+        <div className="flex flex-wrap gap-2.5">
           {
             filteredRest.map((ele,index)=><Link to={`/restaurants/${ele.info.id}/${location.latitude}/${location.longitude}`}><ResCard  key={ele.info.id} resData={ele}/></Link>)
           }

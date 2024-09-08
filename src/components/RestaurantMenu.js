@@ -32,15 +32,15 @@ const RestaurantMenu = () => {
    return resinfo === null ? (
     <ShimmerSimpleGallery card imageHeight={250} row={2} col={4} caption />
   ) : (
-    <div className="menu">
-      <h1>{bannerobj.name}<h3>{bannerobj.avgRatingString}⭐️</h3></h1>
-      <h4>{bannerobj.cuisines.join(", ")} - {bannerobj.costForTwoMessage}</h4>
-      <h2>Menu</h2>
+    <div className="p-20">
+      <h1><b className='text-[24px]'>{bannerobj.name}</b><h3>{bannerobj.avgRatingString}⭐️</h3></h1>
+      <h4 className="text-[22px]">{bannerobj.cuisines.join(", ")} - {bannerobj.costForTwoMessage}</h4>
+      <h2 className="text-[18px]">Menu</h2>
       <ul style={{display:"flex",flexWrap:"wrap",gap:"8px"}}>
 
         {
             itemCards.map((item)=>{
-          return <li key={item.card.info.id} style={{listStyleType:"none",padding:"5px"}}><DisplayFood foodItem={item}/></li>
+          return <li key={item.card.info.id} className="list-none p-1"><DisplayFood foodItem={item}/></li>
           })
         }
       </ul>
