@@ -23,4 +23,17 @@ const ResCard = (props) => {
     );
   };
 
+
+export const withPromotedLabel=(ResCard)=>{
+  return (props)=>{
+    return (
+      <div>
+        <h2 className='absolute bg-black text-white rounded-lg p-1'>Promoted</h2>
+        {console.log(props)}
+        <ResCard {...props}/>
+      </div>
+    )
+  }
+}
+
 export default ResCard

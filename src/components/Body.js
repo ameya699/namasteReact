@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ResCard from './ResCard';
+import ResCard, { withPromotedLabel } from './ResCard';
 import data from "../data/Data"
 import Loader from './Loader';
 import { ShimmerSimpleGallery } from "react-shimmer-effects";
@@ -19,6 +19,8 @@ const Body = () => {
     const [filteredRest,setFilteredRest]=useState([])
     const [location,setLocation]=useState({latitude:17.6599188,longitude:75.9063906})
     
+    const RestaurantCardPromoted=withPromotedLabel(ResCard)
+
     useEffect(()=>{
       setData([]);
       setFilteredRest([])
@@ -29,7 +31,7 @@ const Body = () => {
     const fetchData=async()=>{
       try
       { 
-        
+      
       const data=await fetch(`https://www.swiggy.com/dapi/restaurants/list/v5?lat=${location.latitude}&lng=${location.longitude}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`)
       const json=await data?.json()
  
@@ -116,7 +118,7 @@ const Body = () => {
       <div className="pb-[450px]">
         <div className="flex">
           <div className='p-2 flex gap-2'>
-            <input type='text' size="50" className='text-[16px] border border-black rounded-[4px]' value={searchValue} name='searchText' placeholder='Search for restaurants and food' onChange={handleTextChange}/>
+            <input type='text' size="50" className='text-[16px] border border-black rounded-[4px] text-center' value={searchValue} name='searchText' placeholder='Search for restaurants and food' onChange={handleTextChange}/>
             <button onClick={handleSearch} className='cursor-pointer border-none h-12 bg-gray-300 rounded-md'>Search</button>
           </div>
           <button className='m-2 cursor-pointer border-none h-12' onClick={triggerFilter} style={buttonColor} >Top Rated Restaurants</button>
@@ -127,7 +129,15 @@ const Body = () => {
           {filteredRest.length===0?<ShimmerSimpleGallery card imageHeight={250} row={2} col={4}  caption />:""}
         <div className="flex flex-wrap gap-2.5">
           {
-            filteredRest.map((ele,index)=><Link to={`/restaurants/${ele.info.id}/${location.latitude}/${location.longitude}`}><ResCard  key={ele.info.id} resData={ele}/></Link>)
+            filteredRest.map((ele,index)=>
+            <Link to={`/restaurants/${ele.info.id}/${location.latitude}/${location.longitude}`}>
+              
+              {
+                ele.info.promoted?<RestaurantCardPromoted resData={ele} key={ele.info.id}/>:<ResCard  key={ele.info.id} resData={ele}/>
+              }
+              
+            </Link>
+            )
           }
         </div>
       </div>
