@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/UserContext';
  
 
 const Header = () => {
@@ -12,6 +13,8 @@ const Header = () => {
   }
 
   const onlineStatus=useOnlineStatus()
+  const data=useContext(UserContext)
+
     return (
       <div className="flex justify-between border border-black items-center bg-[rgb(235,224,215)]">
         <div className="w-10">
@@ -36,6 +39,7 @@ const Header = () => {
           <li><Link to='/grocery'>Grocery</Link></li>
             <li className='self-center'><FaShoppingCart/></li>
             <button className='p-0 px-5 cursor-pointer bg-transparent border-2 border-transparent text-lg rounded-md border-2 border-transparent hover:border-[#F0BC83] transition duration-500 linear"' onClick={handleLogin}>{loggedIn?"Logout":"Login"}</button>
+            <li className='px-5 font-bold'>{data.loggedInUser}</li>
           </ul>
         </div>
       </div>

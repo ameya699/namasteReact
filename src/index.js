@@ -10,7 +10,9 @@ import ErrorElement from './components/ErrorElement';
 import Body from './components/Body';
 import RestaurantMenu from './components/RestaurantMenu';
 
-const Grocery=lazy(()=>import("./components/Grocery"))
+const Grocery=lazy(()=>import("./components/Grocery"));
+
+
 
 const appRouter=createBrowserRouter([
     {

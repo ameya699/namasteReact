@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useContext} from 'react'
 import ResCard, { withPromotedLabel } from './ResCard';
 import data from "../data/Data"
 import Loader from './Loader';
@@ -6,6 +6,7 @@ import { ShimmerSimpleGallery } from "react-shimmer-effects";
 import { RiUserLocationFill } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/UserContext';
 
 
 
@@ -18,7 +19,7 @@ const Body = () => {
     const [searchValue,setSearchValue]=useState("");
     const [filteredRest,setFilteredRest]=useState([])
     const [location,setLocation]=useState({latitude:17.6599188,longitude:75.9063906})
-    
+    const {setUserInfo}=useContext(UserContext)
     const RestaurantCardPromoted=withPromotedLabel(ResCard)
 
     useEffect(()=>{
@@ -28,6 +29,7 @@ const Body = () => {
     },[location])
 
     
+
     const fetchData=async()=>{
       try
       { 
@@ -81,6 +83,11 @@ const Body = () => {
       console.log(error);
      }
     }
+
+    const handleUserChange=(e)=>{
+      setUserInfo(e.target.value)
+    }
+
     //set the data and button color
     const triggerFilter=()=>{
       if(topRatedFilter){
@@ -114,6 +121,7 @@ const Body = () => {
       )
     }
 
+
     return data.length ? (
       <div className="pb-[450px]">
         <div className="flex">
@@ -123,6 +131,10 @@ const Body = () => {
           </div>
           <button className='m-2 cursor-pointer border-none h-12' onClick={triggerFilter} style={buttonColor} >Top Rated Restaurants</button>
           <RiUserLocationFill onClick={handleLocation} className='self-center text-2xl cursor-pointer hover:text-orange-500 transition duration-200 ease-linear'/>
+          <div>
+            <label >UserName</label>
+            <input type='text' className='border-40 border p-2 mt-5' onChange={handleUserChange}/>
+          </div>
         </div>
           {topRatedFilter&&<b><span className='self-center'>Showing top rated ⭐️ restaurants</span></b>}
           <Loader load={Boolean(filteredRest.length>0)}/>

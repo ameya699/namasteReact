@@ -22,7 +22,6 @@ const RestaurantMenu = () => {
 
   const itemCards=resinfo?.cards[resinfo?.cards.length-1].groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards;
   const categories=resinfo?.cards[resinfo?.cards.length-1]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(c=>c.card?.card?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
-  console.log("The categories are ",categories)
    return resinfo === null ? (
     <ShimmerSimpleGallery card imageHeight={250} row={2} col={4} caption />
   ) : (
@@ -44,7 +43,6 @@ const RestaurantMenu = () => {
       <p className="font-bold text-lg">{bannerobj.cuisines.join(", ")} - {bannerobj.costForTwoMessage}</p>
       {
         categories.map((category,index)=>{
-          {console.log(category)}
            return (
             
            <ResCategory data={category?.card?.card} showItems={index===showIndex} setShowIndex={()=>index==showIndex?setShowIndex("NAN"):setShowIndex(index)} key={category?.card?.card?.title}/>
