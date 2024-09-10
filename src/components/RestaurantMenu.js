@@ -7,6 +7,7 @@ import ResCategory from "./ResCategory";
 
 const RestaurantMenu = () => {
 
+  const [showIndex,setShowIndex]=useState(0);
   const {resId,lat,long}=useParams();
   
   const resinfo=useRestaurantMenu(resId,lat,long);
@@ -42,11 +43,11 @@ const RestaurantMenu = () => {
       <h1 className='font-bold my-6 text-2xl'>{bannerobj.name}</h1>
       <p className="font-bold text-lg">{bannerobj.cuisines.join(", ")} - {bannerobj.costForTwoMessage}</p>
       {
-        categories.map((category)=>{
+        categories.map((category,index)=>{
           {console.log(category)}
            return (
             
-           <ResCategory data={category?.card?.card}/>
+           <ResCategory data={category?.card?.card} showItems={index===showIndex} setShowIndex={()=>index==showIndex?setShowIndex("NAN"):setShowIndex(index)} key={category?.card?.card?.title}/>
           )
         })
       }
