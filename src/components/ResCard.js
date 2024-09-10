@@ -1,12 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 
 const ResCard = (props) => {
   
     const {resData}=props;
     const data=resData.info
     
-    // console.log(data)
     return (
      <div className="p-1 w-52 h-100 bg-gray-200 border border-white m-1 flex-basis-52 hover:border-orange-500 hover:cursor-pointer transition duration-500 hover:flex-basis-56">
         <img 
@@ -29,7 +27,6 @@ export const withPromotedLabel=(ResCard)=>{
     return (
       <div>
         <h2 className='absolute bg-black text-white rounded-lg p-1'>Promoted</h2>
-        {console.log(props)}
         <ResCard {...props}/>
       </div>
     )

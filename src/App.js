@@ -6,20 +6,35 @@ import Notice from "./components/Notice";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UserContext from "./utils/UserContext";
+import CartContext from "./utils/CartContext";
  
 
 
 function App() {
   const [userInfo,setUserInfo]=useState();
+  const [cartList,setCartList]=useState([]);
   useEffect(()=>{
     const data={
       name:"Ameya Awatade"
     }
+    const cartdata={listval:[
+      {
+          id:"1",
+          productName:"Burger",
+          price:"149"
+      },
+      {   "id":"2",
+          productName:"Chicken Breasts",
+          price:"250"
+      }
+  ]}
+    setCartList(cartdata.listval)
     setUserInfo(data.name)
   },[])
 
   return (
-    <UserContext.Provider value={{loggedInUser:userInfo,setUserInfo}}>
+    <CartContext.Provider value={{productList:cartList}}>
+      <UserContext.Provider value={{loggedInUser:userInfo,setUserInfo}}>
     <div className="app">
       <Notice/>
       <Header />
@@ -27,6 +42,7 @@ function App() {
       <Footer/>
     </div>
     </UserContext.Provider>
+    </CartContext.Provider>
   );
 }
 

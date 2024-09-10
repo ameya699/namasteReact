@@ -5,7 +5,7 @@ import { FaLocationDot } from "react-icons/fa6";
 
 const Footer=()=>{
   return(
-    <div className="bg-[#02060C] text-white h-[300px] py-4 flex justify-center gap-[10rem]">
+    <div className="bg-[#02060C] text-white h-[300px] py-4 flex justify-center gap-[10rem] mt-[100vh] w-full">
       <ul  className='list-none flex flex-col gap-8 w-20'>
         <li className='flex items-center'><img className="w-20"
           alt="App Logo"
