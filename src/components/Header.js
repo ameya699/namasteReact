@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import UserContext from '../utils/UserContext';
 import CartContext from '../utils/CartContext';
+import { useSelector } from 'react-redux';
  
 
 const Header = () => {
@@ -13,6 +14,8 @@ const Header = () => {
   const handleLogin=()=>{
     setLoggedIn(!loggedIn)
   }
+
+  const cartItems=useSelector((store)=>store.cart.items)
 
   const onlineStatus=useOnlineStatus()
   const data=useContext(UserContext)
@@ -39,7 +42,7 @@ const Header = () => {
           <li> <Link to='/about'>About Us</Link></li>
           <li> <Link to='/contact'>Contact Us</Link></li>
           <li><Link to='/grocery'>Grocery</Link></li>
-            <li className='self-center'><Link to='/cart' className='flex justify-between gap-1 items-center'><FaShoppingCart/>{productList.length || 0}</Link></li>
+            <li className='self-center'><Link to='/cart' className='flex justify-between gap-1 items-center'><FaShoppingCart/>{cartItems.length || 0}</Link></li>
             <button className='p-0 px-5 cursor-pointer bg-transparent text-lg rounded-md border-2 border-transparent hover:border-[#F0BC83] transition duration-500 linear"' onClick={handleLogin}>{loggedIn?"Logout":"Login"}</button>
             <li className='px-5 font-bold'>{data.loggedInUser}</li>
           </ul>

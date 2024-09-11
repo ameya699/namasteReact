@@ -1,13 +1,13 @@
 import "./App.css";
 import Header from "./components/Header";
-import Body from "./components/Body";
 import Footer from "./components/Footer";
 import Notice from "./components/Notice";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UserContext from "./utils/UserContext";
 import CartContext from "./utils/CartContext";
- 
+import {Provider} from "react-redux" 
+import appStore from "./utils/appStore";
 
 
 function App() {
@@ -23,9 +23,14 @@ function App() {
           productName:"Burger",
           price:"149"
       },
-      {   "id":"2",
+      {   id:"2",
           productName:"Chicken Breasts",
           price:"250"
+      },
+      {
+        id:"3",
+        productName:"Gulab Jamun",
+        price:"50"
       }
   ]}
     setCartList(cartdata.listval)
@@ -33,7 +38,8 @@ function App() {
   },[])
 
   return (
-    <CartContext.Provider value={{productList:cartList}}>
+    <Provider store={appStore}>
+      <CartContext.Provider value={{productList:cartList}}>
       <UserContext.Provider value={{loggedInUser:userInfo,setUserInfo}}>
     <div className="app">
       <Notice/>
@@ -43,6 +49,7 @@ function App() {
     </div>
     </UserContext.Provider>
     </CartContext.Provider>
+    </Provider>
   );
 }
 

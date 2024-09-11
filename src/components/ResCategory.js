@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
 import ItemList from './ItemList'
+import { FaAngleDown } from "react-icons/fa6";
+import { FaAngleUp } from "react-icons/fa6";
+
 
 const ResCategory = ({data,showItems,setShowIndex}) => {
 
@@ -14,7 +16,7 @@ const ResCategory = ({data,showItems,setShowIndex}) => {
                 <span className='font-bold text-lg'>
                     {data.title} ({data.itemCards.length})
                 </span>
-                <span>⬇️</span>
+                <span className='flex items-center'>{showItems? <FaAngleUp/>:<FaAngleDown/>}</span>
             </div>
        {showItems && <ItemList items={data.itemCards}/>}
             </div>
