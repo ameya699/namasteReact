@@ -1,32 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react'
-import CartContext from '../utils/CartContext';
+import { useDispatch, useSelector } from 'react-redux';
+import ItemList from './ItemList';
+import { clearCart } from '../utils/cartSlice';
 
 const Cart = () => {
-  const [cartItems,setCartItems]=useState([]);
-  const {productList}=useContext(CartContext);
 
-  useEffect(()=>{
-    setCartItems(productList)  
-  })
-
-  if(cartItems.length===0){
+  const productList=useSelector(cartStore=>cartStore.cart.items)
+  const dispatch=useDispatch()
+  if(productList.length===0){
     return (
       <h1 className='font-bold text-center pt-4 text-lg'>Your Cart is empty!</h1>
     )
   } 
-
+  const handleClearCart=()=>{
+    dispatch(clearCart())
+  }
   return (
-    <div className='gap-y-3 flex flex-col items-center pt-10 w-auto'>
-      {
-        cartItems.map((item)=>{
-          return (
-            <div className='flex flex-col gap-2 bg-[#EBDFD7] p-6 w-1/2 rounded-lg' key={item.id}>
-          <h1 className='font-bold text-xl'>{item.productName}</h1>
-          <h1 className='font-semibold'>{item.price}</h1>
-          </div>
-          )
-        })
-      }
+    <div className='text-center m-4 p-4'>
+      <h1 className='text-2xl font-bold'>Cart</h1>
+      <div className='w-6/12 m-auto'>
+        <button className='p-2 m-2 bg-black text-white rounded-lg' onClick={handleClearCart}>Clear Cart</button>
+          <ItemList items={productList}/>
+      </div>
     </div>
   )
 }
